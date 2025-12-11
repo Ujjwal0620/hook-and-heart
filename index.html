@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Hook & Heart — Gifting Boutique</title>
+  <meta name="description" content="Hook & Heart — premium handcrafted gifts. Beautiful packaging, curated collections, easy WhatsApp ordering." />
+
+  <!-- Tailwind CDN (for quick static demo) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Small extra styling to enhance the look */
+    html,body{height:100%;}
+    .glass { background: rgba(255,255,255,0.6); backdrop-filter: blur(6px); }
+    .accent { color: #b91c1c; }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-pink-50 via-white to-amber-50 text-gray-800 leading-relaxed">
+  <div class="max-w-6xl mx-auto p-6">
+    <!-- Header / Hero -->
+    <nav class="w-full py-4 flex items-center justify-between sticky top-0 z-50 bg-white shadow">
+  <h1 class="text-2xl font-bold text-pink-600">Hook & Heart</h1>
+  <button id="menuBtn" class="md:hidden px-3 py-2 border rounded">☰</button>
+  <ul id="menu" class="hidden md:flex gap-6 font-medium">
+    <li><a href="#home" class="hover:text-pink-600">Home</a></li>
+    <li><a href="#about" class="hover:text-pink-600">About</a></li>
+    <li><a href="#featured" class="hover:text-pink-600">Featured</a></li>
+    <li><a href="#gallery" class="hover:text-pink-600">Gallery</a></li>
+    <li><a href="#contact" class="hover:text-pink-600">Contact</a></li>
+  </ul>
+</nav>
+
+<header class="flex flex-col md:flex-row items-center justify-between gap-6">
+      <div>
+        <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight">Hook & Heart <span class="text-pink-600">❤</span></h1>
+        <p class="mt-2 text-gray-600 max-w-xl">Beautiful, thoughtful gifts — curated for every occasion. We handpick items, wrap them with love, and deliver joy. Explore our collections and order instantly on WhatsApp.</p>
+
+        <div class="mt-4 flex gap-3">
+          <a href="https://wa.me/6206100966" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-pink-600 text-white font-semibold shadow hover:bg-pink-700">Book a Gift on WhatsApp</a>
+          <a href="#gallery" class="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-pink-600 text-pink-600 font-medium hover:bg-pink-50">Browse Gallery</a>
+        </div>
+      </div>
+
+      <div class="w-full md:w-1/2">
+        <div class="rounded-2xl overflow-hidden shadow-lg">
+          <img src="./images/image_1 (2).jpg" alt="Hook & Heart hero" class="w-full h-64 object-cover object-center" />
+        </div>
+      </div>
+    </header>
+
+    <!-- About / Why Hook & Heart -->
+    <section class="mt-12 grid md:grid-cols-3 gap-6">
+      <article class="glass p-6 rounded-2xl shadow">
+        <h2 class="text-xl font-semibold">Our Promise</h2>
+        <p class="mt-2 text-sm text-gray-700">At Hook & Heart we believe every gift should tell a story. We source unique items, ensure premium packaging, and add a handwritten note on request. Whether it's a birthday, anniversary, thank-you, or 'just because', our collections are tailored to create moments.</p>
+      </article>
+
+      <article class="glass p-6 rounded-2xl shadow">
+        <h2 class="text-xl font-semibold">Curated Collections</h2>
+        <p class="mt-2 text-sm text-gray-700">Each collection is hand-curated — from luxury self-care boxes and gourmet treats to personalized keepsakes. We test, photograph, and package every product to make gifting effortless and meaningful.</p>
+      </article>
+
+      <article class="glass p-6 rounded-2xl shadow">
+        <h2 class="text-xl font-semibold">Fast & Personal</h2>
+        <p class="mt-2 text-sm text-gray-700">Order directly via WhatsApp. Tell us the recipient, occasion, and message — we’ll take care of the rest. International and expedited shipping options available on request.</p>
+      </article>
+    </section>
+
+    <!-- Featured products -->
+    <section class="mt-12">
+      <div class="flex items-center justify-between">
+        <h2 class="text-2xl font-bold">Featured Gifts</h2>
+        <p class="text-sm text-gray-600">Handpicked bestsellers</p>
+      </div>
+
+      <div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Product Card 1 -->
+        <div class="rounded-xl overflow-hidden bg-white shadow hover:shadow-lg transition">
+          <img src="./images/image_1 (3).jpg" alt="Featured 1" class="w-full h-48 object-cover" />
+          <div class="p-4">
+            <h3 class="font-semibold text-lg">Luxury Care Box</h3>
+            <p class="mt-2 text-sm text-gray-600">A curated self-care box with artisanal soaps, a scented candle, and premium tea sachets. Elegant packaging included.</p>
+            <div class="mt-4 flex items-center justify-between">
+              <div class="text-lg font-bold">₹1,499</div>
+              <a href="https://wa.me/6206100966?text=Hi%20Hook%20%26%20Heart%2C%20I%20want%20to%20book%20the%20Luxury%20Care%20Box." target="_blank" class="px-4 py-2 rounded-md bg-pink-600 text-white font-medium">Buy / Book</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Card 2 -->
+        <div class="rounded-xl overflow-hidden bg-white shadow hover:shadow-lg transition">
+          <img src="./images/image_1 (4).jpg" alt="Featured 2" class="w-full h-48 object-cover" />
+          <div class="p-4">
+            <h3 class="font-semibold text-lg">Date Night Box</h3>
+            <p class="mt-2 text-sm text-gray-600">A romantic selection with gourmet chocolates, a plush throw, and a keepsake card. Perfect for anniversaries.</p>
+            <div class="mt-4 flex items-center justify-between">
+              <div class="text-lg font-bold">₹1,999</div>
+              <a href="https://wa.me/6206100966?text=Hello%20Hook%20%26%20Heart%2C%20I%20want%20the%20Date%20Night%20Box." target="_blank" class="px-4 py-2 rounded-md bg-pink-600 text-white font-medium">Buy / Book</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Card 3 -->
+        <div class="rounded-xl overflow-hidden bg-white shadow hover:shadow-lg transition">
+          <img src="./images/image_1 (5).jpg" alt="Featured 3" class="w-full h-48 object-cover" />
+          <div class="p-4">
+            <h3 class="font-semibold text-lg">Personalized Keepsake</h3>
+            <p class="mt-2 text-sm text-gray-600">Engraved gifts and custom notes. Add a name or short message to make it truly unique.</p>
+            <div class="mt-4 flex items-center justify-between">
+              <div class="text-lg font-bold">₹1,299</div>
+              <a href="https://wa.me/6206100966?text=Hi%20Hook%20%26%20Heart%2C%20I%27d%20like%20a%20Personalized%20Keepsake." target="_blank" class="px-4 py-2 rounded-md bg-pink-600 text-white font-medium">Buy / Book</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery -->
+    <section id="gallery" class="mt-12">
+      <h2 class="text-2xl font-bold">Gallery</h2>
+      <p class="mt-2 text-gray-600">A peek inside our packaging and past gifts. Click any image to open full size.</p>
+
+      <div class="mt-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+        <!-- Insert all extracted images here -->
+        <a href="./images/image_1 (6).jpg" target="_blank" class="block rounded-lg overflow-hidden shadow hover:scale-105 transition transform">
+          <img src="./images/image_1 (6).jpg" alt="gallery-1" class="w-full h-40 object-cover" />
+        </a>
+        <a href="./images/image_5_21.png" target="_blank" class="block rounded-lg overflow-hidden shadow hover:scale-105 transition transform">
+          <img src="./images/image_5_21.png" alt="gallery-2" class="w-full h-40 object-cover" />
+        </a>
+        <a href="./images/image_6_24.png" target="_blank" class="block rounded-lg overflow-hidden shadow hover:scale-105 transition transform">
+          <img src="./images/image_6_24.png" alt="gallery-3" class="w-full h-40 object-cover" />
+        </a>
+        <a href="./images/image_7_27.png" target="_blank" class="block rounded-lg overflow-hidden shadow hover:scale-105 transition transform">
+          <img src="./images/image_7_27.png" alt="gallery-4" class="w-full h-40 object-cover" />
+        </a>
+        <a href="./images/image_8_30.png" target="_blank" class="block rounded-lg overflow-hidden shadow hover:scale-105 transition transform">
+          <img src="./images/image_8_30.png" alt="gallery-5" class="w-full h-40 object-cover" />
+        </a>
+        <a href="./images/image_9_30.png" target="_blank" class="block rounded-lg overflow-hidden shadow hover:scale-105 transition transform">
+          <img src="./images/image_9_30.png" alt="gallery-6" class="w-full h-40 object-cover" />
+        </a>
+        <a href="./images/image_10_35.png" target="_blank" class="block rounded-lg overflow-hidden shadow hover:scale-105 transition transform">
+          <img src="./images/image_10_35.png" alt="gallery-7" class="w-full h-40 object-cover" />
+        </a>
+        <a href="./images/image_11_38.png" target="_blank" class="block rounded-lg overflow-hidden shadow hover:scale-105 transition transform">
+          <img src="./images/image_11_38.png" alt="gallery-8" class="w-full h-40 object-cover" />
+        </a>
+        <a href="./images/image_12_41.png" target="_blank" class="block rounded-lg overflow-hidden shadow hover:scale-105 transition transform">
+          <img src="./images/image_12_41.png" alt="gallery-9" class="w-full h-40 object-cover" />
+        </a>
+        <a href="./images/image_13_44.png" target="_blank" class="block rounded-lg overflow-hidden shadow hover:scale-105 transition transform">
+          <img src="./images/image_13_44.png" alt="gallery-10" class="w-full h-40 object-cover" />
+        </a>
+        <a href="./images/image_14_47.png" target="_blank" class="block rounded-lg overflow-hidden shadow hover:scale-105 transition transform">
+          <img src="./images/image_14_47.png" alt="gallery-11" class="w-full h-40 object-cover" />
+        </a>
+        <a href="./images/image_15_50.png" target="_blank" class="block rounded-lg overflow-hidden shadow hover:scale-105 transition transform">
+          <img src="./images/image_15_50.png" alt="gallery-12" class="w-full h-40 object-cover" />
+        </a>
+        <a href="./images/image_16_53.png" target="_blank" class="block rounded-lg overflow-hidden shadow hover:scale-105 transition transform">
+          <img src="./images/image_16_53.png" alt="gallery-13" class="w-full h-40 object-cover" />
+        </a>
+        <a href="./images/image_17_56.png" target="_blank" class="block rounded-lg overflow-hidden shadow hover:scale-105 transition transform">
+          <img src="./images/image_17_56.png" alt="gallery-14" class="w-full h-40 object-cover" />
+        </a>
+        <a href="./images/image_18_59.png" target="_blank" class="block rounded-lg overflow-hidden shadow hover:scale-105 transition transform">
+          <img src="./images/image_18_59.png" alt="gallery-15" class="w-full h-40 object-cover" />
+        </a>
+        <a href="./images/image_19_62.png" target="_blank" class="block rounded-lg overflow-hidden shadow hover:scale-105 transition transform">
+          <img src="./images/image_19_62.png" alt="gallery-16" class="w-full h-40 object-cover" />
+        </a>
+        <a href="./images/image_20_65.png" target="_blank" class="block rounded-lg overflow-hidden shadow hover:scale-105 transition transform">
+          <img src="./images/image_20_65.png" alt="gallery-17" class="w-full h-40 object-cover" />
+        </a>
+        <a href="./images/image_21_71.png" target="_blank" class="block rounded-lg overflow-hidden shadow hover:scale-105 transition transform">
+          <img src="./images/image_21_71.png" alt="gallery-18" class="w-full h-40 object-cover" />
+        </a>
+        <a href="./images/image_0_5.png" target="_blank" class="block rounded-lg overflow-hidden shadow hover:scale-105 transition transform">
+          <img src="./images/image_0_5.png" alt="gallery-19" class="w-full h-40 object-cover" />
+        </a>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="mt-12">
+      <h2 class="text-2xl font-bold">How it works</h2>
+      <ol class="mt-4 space-y-3 list-decimal list-inside text-gray-700">
+        <li><strong>Choose</strong> — Browse our featured gifts or gallery and pick what speaks to you.</li>
+        <li><strong>Message</strong> — Click any "Buy / Book" button to open WhatsApp with a pre-filled message for the seller.</li>
+        <li><strong>Confirm</strong> — Share recipient details, delivery address, and preferred delivery date.</li>
+        <li><strong>Deliver</strong> — We wrap with care and ship or hand-deliver as requested.</li>
+      </ol>
+    </section>
+
+    <!-- Contact -->
+    <footer class="mt-12 border-t pt-8 pb-12">
+      <div class="grid md:grid-cols-2 gap-6 items-start">
+        <div>
+          <h3 class="text-xl font-semibold">Contact the Seller</h3>
+          <p class="mt-2 text-gray-700">For orders and queries, reach out on WhatsApp. We're quick to respond between 9 AM — 9 PM.</p>
+
+          <div class="mt-4 flex items-center gap-4">
+            <a href="https://wa.me/6206100966" target="_blank" class="inline-flex items-center gap-2 px-4 py-3 rounded-full bg-green-600 text-white font-semibold">WhatsApp: +62 0610 0966</a>
+            <a href="mailto:hello@hookandheart.example" class="inline-flex items-center gap-2 px-4 py-3 rounded-full border">Email</a>
+          </div>
+
+          <p class="mt-4 text-sm text-gray-600">Address: Hook & Heart Studio — Packaging & Curation Centre (Address available on request).</p>
+        </div>
+
+        <div>
+          <h3 class="text-xl font-semibold">Quick Order</h3>
+          <p class="mt-2 text-gray-700">Use the button below to open WhatsApp and start your order — include product name and delivery details.</p>
+          <div class="mt-4">
+            <a href="https://wa.me/6206100966?text=Hi%20Hook%20%26%20Heart%2C%20I%20want%20to%20place%20an%20order." target="_blank" class="block w-full text-center px-4 py-3 rounded-lg bg-pink-600 text-white font-semibold">Order on WhatsApp</a>
+          </div>
+
+          <p class="mt-4 text-sm text-gray-500">Seller WhatsApp number (tap to message): <a href="https://wa.me/6206100966" class="text-pink-600 font-medium">+62 0610 0966</a></p>
+        </div>
+      </div>
+
+      <p class="mt-8 text-xs text-gray-500">© Hook & Heart — All rights reserved. Images shown are representative. Prices indicative. For custom orders, message us on WhatsApp.</p>
+    </footer>
+  </div>
+
+  <!-- Optional small script for smooth scrolling -->
+  <script>
+    document.getElementById('menuBtn').onclick = ()=>{
+  document.getElementById('menu').classList.toggle('hidden')
+}
+
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        e.preventDefault();
+        document.querySelector(a.getAttribute('href')).scrollIntoView({behavior:'smooth'});
+      })
+    })
+  </script>
+</body>
+</html>
