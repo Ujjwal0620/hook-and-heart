@@ -9,9 +9,11 @@ export default function Home(){
  const start=async()=>{
   setBusy(true);setMessage('Preparing secure live connection…');
   try{
-   const r=await fetch('/api/live/token',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({role:'visitor'})});
-   if(!r.ok)throw new Error('Live room is temporarily unavailable.');
-   const d=await r.json();setToken(d.token);setUrl(d.url);setMessage('Browser permission will now ask for camera access.');
+   const r=await fetch('/api/live/token',{method:'POST',headers:{'content-type':'application/json'},cache:'no-store',body:JSON.stringify({role:'visitor'})});
+   const d=await r.json().catch(()=>({}));
+   if(!r.ok)throw new Error(d.error||`Live room unavailable (HTTP ${r.status}). Check the LiveKit configuration in Vercel.`);
+   if(!d.token||!d.url)throw new Error('Live room configuration is incomplete. Add LIVEKIT_URL, LIVEKIT_API_KEY and LIVEKIT_API_SECRET in Vercel, then redeploy.');
+   setToken(d.token);setUrl(d.url);setMessage('Connection ready. Your browser will now request camera permission.');
   }catch(e){setMessage(e.message||'Unable to start camera sharing.');setBusy(false)}
  };
  const stop=()=>{setToken(null);setUrl(null);setOpen(false);setMessage('');setBusy(false)};
