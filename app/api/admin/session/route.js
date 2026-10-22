@@ -1,13 +1,16 @@
 import {NextResponse} from 'next/server';
 import crypto from 'node:crypto';
+export const dynamic='force-dynamic';
 function sign(value){return crypto.createHmac('sha256',process.env.ADMIN_PASSWORD||'').update(value).digest('hex')}
 export async function POST(req){
  try{
   const{password}=await req.json();
-  if(!process.env.ADMIN_PASSWORD||password!==process.env.ADMIN_PASSWORD)return NextResponse.json({error:'Unauthorized'},{status:401});
+  const expected=process.env.ADMIN_PASSWORD;
+  if(!expected)return NextResponse.json({error:'ADMIN_PASSWORD is not configured on this deployment.'},{status:500,headers:{'Cache-Control':'no-store'}});
+  if(typeof password!=='string'||password!==expected)return NextResponse.json({error:'Invalid admin password.'},{status:401,headers:{'Cache-Control':'no-store'}});
   const value='authenticated.'+sign('authenticated');
-  const res=NextResponse.json({ok:true});
+  const res=NextResponse.json({ok:true},{headers:{'Cache-Control':'no-store'}});
   res.cookies.set('hh_admin',value,{httpOnly:true,secure:true,sameSite:'strict',path:'/',maxAge:7200});
   return res;
- }catch{return NextResponse.json({error:'Invalid request.'},{status:400})}
+ }catch{return NextResponse.json({error:'Invalid login request.'},{status:400,headers:{'Cache-Control':'no-store'}})}
 }
