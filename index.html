@@ -1,66 +1,81 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#120914">
-  <meta name="description" content="A tiny love letter made just for you.">
-  <title>A Little Love For You ❤️</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#120914">
+<meta name="description" content="A private little love letter with an optional camera surprise.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self'; connect-src 'self'; media-src 'self' blob:; object-src 'none'; base-uri 'self'; frame-ancestors 'none';">
+<title>A Little Love For You ❤️</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-  <div class="ambient"><span></span><span></span><span></span><span></span><span></span></div>
+<div class="ambient" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+<main class="card-shell">
+<nav class="topbar">
+<div class="brand">♡ <span>for you</span></div>
+<div class="tiny-note">made with love</div>
+</nav>
+<section class="hero">
+<div class="eyebrow">A LITTLE SURPRISE</div>
+<h1>Some things<br><em>are meant</em><br>to be felt.</h1>
+<p class="intro">I made this tiny corner of the internet because one ordinary day deserved a little more love.</p>
+<button class="primary" id="openLetter">Open your letter <span>↗</span></button>
+<div class="scroll-hint">scroll slowly <b>↓</b></div>
+</section>
 
-  <main class="card-shell">
-    <nav class="topbar">
-      <div class="brand">♡ <span>for you</span></div>
-      <div class="tiny-note">made with love</div>
-    </nav>
+<section class="letter" id="letter">
+<div class="stamp">♡</div>
+<p class="eyebrow">DEAR YOU,</p>
+<h2>You were not supposed to find this by accident.</h2>
+<p>There are people who make a day brighter without even trying. This is your little reminder that you matter, you are appreciated, and someone was smiling while making this.</p>
+<p class="signature">With a ridiculous amount of love,<br><strong>Someone who cares ❤️</strong></p>
 
-    <section class="hero">
-      <div class="eyebrow">A LITTLE SURPRISE</div>
-      <h1>Some things<br><em>are meant</em><br>to be felt.</h1>
-      <p class="intro">I made this tiny corner of the internet because one ordinary day deserved a little more love.</p>
-      <button class="primary" id="openLetter">Open your letter <span>↗</span></button>
-      <div class="scroll-hint">scroll slowly <b>↓</b></div>
-    </section>
+<div class="surprise-box">
+<div>
+<span class="eyebrow">ONE LAST THING</span>
+<h3>Want to see yourself in the surprise?</h3>
+<p>Your camera is completely optional. Nothing can start from a cookie, a scroll, a link, or a hidden action. Choose the button, read the consent screen, and then make your own decision.</p>
+</div>
+<button class="outline" id="cameraBtn">Choose camera <span>📷</span></button>
+</div>
 
-    <section class="letter" id="letter">
-      <div class="stamp">♡</div>
-      <p class="eyebrow">DEAR YOU,</p>
-      <h2>You were not supposed to find this by accident.</h2>
-      <p>There are people who make a day brighter without even trying. This is your little reminder that you matter, you are appreciated, and someone was smiling while making this.</p>
-      <p class="signature">With a ridiculous amount of love,<br><strong>Someone who cares ❤️</strong></p>
+<div class="camera-panel hidden" id="cameraPanel" aria-live="polite">
+<div class="camera-head"><span>PRIVATE CAMERA PREVIEW</span><button id="closeCamera" aria-label="Close camera">×</button></div>
+<div class="consent-card" id="consentCard">
+<div class="consent-icon">📷</div>
+<h3>Your choice, your camera.</h3>
+<p>This page can request camera access only after you explicitly choose to continue. The preview is local to this browser session. This demo does not record, upload, or transmit your camera.</p>
+<div class="consent-actions">
+<button class="primary" id="allowCamera">Continue & allow camera</button>
+<button class="outline" id="denyCamera">No, keep it off</button>
+</div>
+</div>
+<video id="camera" autoplay playsinline muted class="hidden"></video>
+<div class="camera-controls hidden" id="cameraControls">
+<span id="cameraStatus">Camera preview is active locally.</span>
+<button class="outline" id="stopCamera">Stop camera</button>
+</div>
+</div>
 
-      <div class="surprise-box">
-        <div>
-          <span class="eyebrow">ONE LAST THING</span>
-          <h3>Want to see yourself in the surprise?</h3>
-          <p>Only if you choose to. Your browser will ask for camera access, and nothing starts unless you press the button below and allow it.</p>
-        </div>
-        <button class="outline" id="cameraBtn">Try the camera <span>📷</span></button>
-      </div>
+<div class="privacy-grid">
+<div><strong>🔒 No hidden activation</strong><span>Camera requests require an intentional button click.</span></div>
+<div><strong>🧭 Clear status</strong><span>The page always tells you whether the camera is on.</span></div>
+<div><strong>⏹ Easy stop</strong><span>You can stop the camera at any time.</span></div>
+</div>
 
-      <div class="camera-panel hidden" id="cameraPanel">
-        <div class="camera-head"><span>YOUR SURPRISE CAMERA</span><button id="closeCamera" aria-label="Close camera">×</button></div>
-        <video id="camera" autoplay playsinline muted></video>
-        <p id="cameraStatus">Camera preview is local to this page.</p>
-      </div>
-
-      <div class="finale">
-        <div class="heart">♥</div>
-        <h2>Okay, you made it.</h2>
-        <p>Now go make someone else's day a little softer.</p>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">© 2026 · a tiny love card · <a href="./admin.html">creator dashboard</a></footer>
-
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="./app.js"></script>
+<div class="finale">
+<div class="heart">♥</div>
+<h2>Okay, you made it.</h2>
+<p>Now go make someone else's day a little softer.</p>
+</div>
+</section>
+</main>
+<footer class="footer">© 2026 · a tiny love card · <a href="./admin.html">creator dashboard</a></footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="./app.js"></script>
 </body>
 </html>
