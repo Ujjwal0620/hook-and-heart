@@ -1,0 +1,1 @@
+import './globals.css';export const metadata={title:'Hook & Heart — A Little Surprise',description:'A romantic interactive greeting experience.'};export default function RootLayout({children}){return <html lang="en"><body>{children}</body></html>}
