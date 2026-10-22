@@ -3,7 +3,7 @@ import {useState} from 'react';
 import {JitsiMeeting} from '@jitsi/react-sdk';
 const ROOM=process.env.NEXT_PUBLIC_JITSI_ROOM||'hook-heart-live-7f3c9b2a-91e4-4b7d-a2c6-8d4f19e2b671';
 export default function Home(){
- const[open,setOpen]=useState(false),[live,setLive]=useState(false);
+ const[open,setOpen]=useState(false),[live,setLive]=useState(false),[ready,setReady]=useState(false);
  const stop=()=>{setLive(false);setOpen(false)};
  return <main className="page">
   <section className="hero"><div className="eyebrow">A LITTLE SURPRISE</div><h1>Some things are<br/><em>meant to be felt.</em></h1><p>A tiny digital letter made with a little more heart than usual.</p><button onClick={()=>document.getElementById('letter').scrollIntoView({behavior:'smooth'})}>Open your letter ♥</button></section>
