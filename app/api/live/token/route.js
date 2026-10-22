@@ -1,1 +1,16 @@
-import {NextResponse} from 'next/server';import {AccessToken} from 'livekit-server-sdk';export async function POST(req){try{const body=await req.json();if(body.role==='admin'&&req.cookies.get('hh_admin')?.value!=='authenticated')return NextResponse.json({error:'Unauthorized'},{status:401});if(!process.env.LIVEKIT_API_KEY||!process.env.LIVEKIT_API_SECRET||!process.env.LIVEKIT_URL)return NextResponse.json({error:'LiveKit environment variables are missing.'},{status:500});const room=process.env.LIVEKIT_ROOM||'hook-heart-global';const identity=(body.role==='admin'?'admin-':'visitor-')+crypto.randomUUID();const at=new AccessToken(process.env.LIVEKIT_API_KEY,process.env.LIVEKIT_API_SECRET,{identity,name:identity,ttl:'8h'});at.addGrant({room,roomJoin:true,canPublish:body.role!=='admin',canSubscribe:true});return NextResponse.json({token:await at.toJwt(),url:process.env.LIVEKIT_URL})}catch(e){return NextResponse.json({error:'Token creation failed.'},{status:500})}}
+import {NextResponse} from 'next/server';
+import {AccessToken} from 'livekit-server-sdk';
+export async function POST(req){
+ try{
+  const body=await req.json();
+  if(!['visitor','admin'].includes(body.role))return NextResponse.json({error:'Invalid role.'},{status:400});
+  if(body.role==='admin'&&req.cookies.get('hh_admin')?.value!=='authenticated')return NextResponse.json({error:'Unauthorized'},{status:401});
+  const{LIVEKIT_API_KEY:key,LIVEKIT_API_SECRET:secret,LIVEKIT_URL:url}=process.env;
+  if(!key||!secret||!url)return NextResponse.json({error:'LiveKit environment variables are missing.'},{status:500});
+  const room=process.env.LIVEKIT_ROOM||'hook-heart-global';
+  const identity=(body.role==='admin'?'admin-':'visitor-')+crypto.randomUUID();
+  const at=new AccessToken(key,secret,{identity,name:identity,ttl:'2h'});
+  at.addGrant({room,roomJoin:true,canPublish:body.role==='visitor',canSubscribe:true});
+  return NextResponse.json({token:await at.toJwt(),url});
+ }catch{return NextResponse.json({error:'Token creation failed.'},{status:500})}
+}
